@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amazon-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: amazon-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: amazon-app
+    spec:
+      containers:
+        - name: amazon-app-container
+          image: monudocker334/amazon:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
